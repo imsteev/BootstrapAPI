@@ -12,12 +12,15 @@ app = Flask(__name__)
 """
 
 
-ENDPOINT_STRING = """@app.route('/', methods=['GET'])
-def index():
-    print("REQUEST HEADERS")
-    print(request.headers)
-    return "ENDPOINT: index"
-"""
+def construct_endpoint(path='', fn_name='f', methods=None):
+    methods = methods or ['GET', 'POST']
+    return """@app.route('/{0}', methods={1})
+def {2}():
+    return "ENDPOINT: {3}"
+""".format(path, str(methods), fn_name, '/' + path)
+
+
+ENDPOINT_STRING = construct_endpoint(path="", fn_name="index", methods=['GET'])
 
 SCRIPT_STRING = """if __name__ == "__main__":
 
@@ -27,15 +30,6 @@ SCRIPT_STRING = """if __name__ == "__main__":
 
     app.run(host=host, port=port, debug=debug)
 """
-
-
-def construct_endpoint(path='', fn_name='f'):
-    return """@app.route('/{0}', methods=['GET', 'POST'])
-def {1}():
-    print("REQUEST HEADERS")
-    print(request.headers)
-    return "ENDPOINT: {2}"
-""".format(path, fn_name, fn_name)
 
 
 if __name__ == "__main__":
@@ -55,8 +49,9 @@ if __name__ == "__main__":
     # Construct endpoint section
     endpoints = []
     if args.endpoints:
-        endpoints = list(set([e.strip() for e in args.endpoints.split(',')]))
-        ENDPOINT_STRING += ''.join([construct_endpoint(name) for name in endpoints])
+        endpoints = list(set([e.strip() for e in args.endpoints.split(',')]))  # remove dupes
+        ENDPOINT_STRING += "\n\n"  # spacing after index
+        ENDPOINT_STRING += '\n\n'.join([construct_endpoint(path=name, fn_name=name) for name in endpoints])
 
     content = "\n\n".join([HEADER_STRING, ENDPOINT_STRING, SCRIPT_STRING])
 
