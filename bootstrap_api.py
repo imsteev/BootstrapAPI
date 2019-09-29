@@ -41,6 +41,7 @@ def {1}():
 if __name__ == "__main__":
 
     parser = ArgumentParser()
+    parser.add_argument('-p', metavar='text', nargs='?', default='app.py', help="file path")
     parser.add_argument('-endpoints', metavar='text', nargs='?', default=None)
     parser.add_argument('-host', metavar='text', nargs='?', default=None)
     parser.add_argument('-port', metavar='text', nargs='?', default=None)
@@ -55,10 +56,11 @@ if __name__ == "__main__":
     endpoints = []
     if args.endpoints:
         endpoints = list(set([e.strip() for e in args.endpoints.split(',')]))
-        ENDPOINT_STRING += ''.join([construct_endpoint(name)
-                                    for name in endpoints])
+        ENDPOINT_STRING += ''.join([construct_endpoint(name) for name in endpoints])
 
     content = "\n\n".join([HEADER_STRING, ENDPOINT_STRING, SCRIPT_STRING])
 
-    with open('app.py', 'w') as f:
+    with open(args.p, 'w') as f:
         f.write(content)
+
+    print("Successfully generated API: {}".format(args.p))
