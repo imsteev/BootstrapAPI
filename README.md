@@ -2,6 +2,8 @@
 
 
 ## Prerequisites
+- Python3
+- Flask
 
 ## Usage
 ```
@@ -32,29 +34,27 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    print("REQUEST HEADERS")
-    print(request.headers)
-    return "ENDPOINT: index"
-@app.route('/divide', methods=['GET', 'POST'])
-def f():
-    print("REQUEST HEADERS")
-    print(request.headers)
-    return "ENDPOINT: f"
+    return "ENDPOINT: /"
+
+
 @app.route('/subtract', methods=['GET', 'POST'])
-def f():
-    print("REQUEST HEADERS")
-    print(request.headers)
-    return "ENDPOINT: f"
-@app.route('/multiply', methods=['GET', 'POST'])
-def f():
-    print("REQUEST HEADERS")
-    print(request.headers)
-    return "ENDPOINT: f"
+def subtract():
+    return "ENDPOINT: /subtract"
+
+
 @app.route('/add', methods=['GET', 'POST'])
-def f():
-    print("REQUEST HEADERS")
-    print(request.headers)
-    return "ENDPOINT: f"
+def add():
+    return "ENDPOINT: /add"
+
+
+@app.route('/multiply', methods=['GET', 'POST'])
+def multiply():
+    return "ENDPOINT: /multiply"
+
+
+@app.route('/divide', methods=['GET', 'POST'])
+def divide():
+    return "ENDPOINT: /divide"
 
 
 if __name__ == "__main__":
