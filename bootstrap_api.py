@@ -35,16 +35,14 @@ SCRIPT_STRING = """if __name__ == "__main__":
 if __name__ == "__main__":
 
     parser = ArgumentParser()
-    parser.add_argument('-p', metavar='text', nargs='?', default='app.py', help="file path")
-    parser.add_argument('-endpoints', metavar='text', nargs='?', default=None)
-    parser.add_argument('-host', metavar='text', nargs='?', default=None)
-    parser.add_argument('-port', metavar='text', nargs='?', default=None)
+    parser.add_argument('-n', '--name', type=str, default='app.py', help="File name to be generated in current directory. Default: app.py")
+    parser.add_argument('-e', '--endpoints', type=str, default=None, help="Comma separated string of endpoints")
+    parser.add_argument('-host', type=str, default="localhost", help="Host address to be reached at. Default: \"localhost\"")
+    parser.add_argument('-port', type=int, default=8888, help="Port to listen at. Default port: 8888")
 
     args = parser.parse_args()
 
-    host = args.host or "localhost"
-    port = args.port or 8888
-    HEADER_STRING = HEADER_STRING.format(host=host, port=port)
+    HEADER_STRING = HEADER_STRING.format(host=args.host, port=args.port)
 
     # Construct endpoint section
     endpoints = []
@@ -55,7 +53,7 @@ if __name__ == "__main__":
 
     content = "\n\n".join([HEADER_STRING, ENDPOINT_STRING, SCRIPT_STRING])
 
-    with open(args.p, 'w') as f:
+    with open(args.name, 'w') as f:
         f.write(content)
 
-    print("Successfully generated API: {}".format(args.p))
+    print("Successfully generated API: {}".format(args.name))
