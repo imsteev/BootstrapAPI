@@ -18,9 +18,6 @@ optional arguments:
                         Comma separated string of endpoints
   -host HOST            Host address to be reached at. Default: "localhost"
   -port PORT            Port to listen at. Default port: 8888
-
-# Example
-python3 ./bootstrap_api.py -n api.py -e "endpoint1, endpoint2, endpoint3" -host localhost -port 8080
 ```
 
 ### Defaults
@@ -31,7 +28,7 @@ Note: all APIs will be generated with an `index` endpoint that can be reached at
 
 ### Example
 ```
-Stephens-MacBook-Pro:bootstrap_flask_api stephenchung$ python ./bootstrap_api.py -endpoints "add, subtract, divide, multiply" -host 127.0.0.1
+Stephens-MacBook-Pro:bootstrap_flask_api stephenchung$ python ./bootstrap_api.py -e "add, subtract, divide, multiply" -host 127.0.0.1
 Successfully generated API: app.py
 Stephens-MacBook-Pro:bootstrap_flask_api stephenchung$ cat app.py
 import json
