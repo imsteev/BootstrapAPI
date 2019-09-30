@@ -1,16 +1,29 @@
 # bootstrap-flask-api
 
 
-## Prerequisites
+### Prerequisites
 - Python3
 - Flask
 
-## Usage
+### Usage
 ```
-python3 ./bootstrap_api.py -endpoints "endpoint1, endpoint2, endpoint3" -host localhost -port 8080
+usage: bootstrap_api.py [-h] [-n NAME] [-e ENDPOINTS] [-host HOST]
+                        [-port PORT]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -n NAME, --name NAME  File name to be generated in current directory.
+                        Default: app.py
+  -e ENDPOINTS, --endpoints ENDPOINTS
+                        Comma separated string of endpoints
+  -host HOST            Host address to be reached at. Default: "localhost"
+  -port PORT            Port to listen at. Default port: 8888
+
+# Example
+python3 ./bootstrap_api.py -n api.py -e "endpoint1, endpoint2, endpoint3" -host localhost -port 8080
 ```
 
-## Defaults
+### Defaults
 - host = "localhost"
 - port = 8888
 
@@ -66,6 +79,6 @@ if __name__ == "__main__":
     app.run(host=host, port=port, debug=debug)
 ```
 
-## Upcoming work
+### Upcoming work
 - Add option to supply config from file
 - Dockerize
