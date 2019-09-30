@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3  # path to Python3 binary
 from argparse import ArgumentParser
 
 HEADER_STRING = """import json
