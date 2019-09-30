@@ -27,10 +27,15 @@ optional arguments:
 Note: all APIs will be generated with an `index` endpoint that can be reached at the root path aka `<host>:<port>`
 
 ### Example
+
+Generating an API file
 ```
 Stephens-MacBook-Pro:bootstrap_flask_api stephenchung$ python ./bootstrap_api.py -e "add, subtract, divide, multiply" -host 127.0.0.1
 Successfully generated API: app.py
-Stephens-MacBook-Pro:bootstrap_flask_api stephenchung$ cat app.py
+```
+
+Contents of generated `app.py`
+```py
 import json
 import os
 
